@@ -1,0 +1,39 @@
+# Hosts
+[swarm-managers]
+130.193.46.154
+
+[swarm-workers]
+130.193.46.44
+
+[jenkins]
+jenkins_host ansible_ssh_host=84.201.151.85
+
+[CockroachDB]
+CockroachDB_host ansible_ssh_host=130.193.44.46
+
+[consul]
+consul_host ansible_ssh_host=84.201.150.180
+
+[swarm:children]
+swarm-managers
+swarm-workers
+
+[swarm:vars]
+ansible_ssh_user=admin
+ansible_ssh_private_key_file=/home/admin/key
+ansible_python_interpreter=/usr/bin/python
+
+[jenkins:vars]
+ansible_ssh_user=admin
+ansible_ssh_private_key_file=/home/admin/key
+ansible_python_interpreter=/usr/bin/python
+
+[CockroachDB:vars]
+ansible_ssh_user=admin
+ansible_ssh_private_key_file=/home/admin/key
+ansible_python_interpreter=/usr/bin/python
+
+[consul:vars]
+ansible_ssh_user=admin
+ansible_ssh_private_key_file=/home/admin/key
+ansible_python_interpreter=/usr/bin/python
