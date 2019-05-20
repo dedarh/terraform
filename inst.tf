@@ -1,14 +1,3 @@
-resource "yandex_vpc_network" "test" {
-  name = "test"
-}
-
-resource "yandex_vpc_subnet" "local" {
-  name           = "local"
-  zone           = "${var.ya-zone}"
-  network_id     = "${yandex_vpc_network.test.id}"
-  v4_cidr_blocks = ["192.168.10.0/24"]
-}
-
 resource "yandex_compute_instance" "docker" {
   name = "docker"
   hostname = "docker"
@@ -134,43 +123,7 @@ resource "yandex_compute_instance" "jenkins" {
   }
 }
 
-output "docker_ip_address_private" {
-  value = "${yandex_compute_instance.docker.network_interface.0.ip_address}"
-}
 
-output "docker_ip_address_public" {
-  value = "${yandex_compute_instance.docker.network_interface.0.nat_ip_address}"
-}
-
-output "consul_ip_address_private" {
-  value = "${yandex_compute_instance.consul.network_interface.0.ip_address}"
-}
-
-output "consul_ip_address_public" {
-  value = "${yandex_compute_instance.consul.network_interface.0.nat_ip_address}"
-}
-output "dockerslave_ip_address_private" {
-  value = "${yandex_compute_instance.dockerslave.network_interface.0.ip_address}"
-}
-
-output "dockerslave_ip_address_public" {
-  value = "${yandex_compute_instance.dockerslave.network_interface.0.nat_ip_address}"
-}
-
-output "cocroachdb_ip_address_private" {
-  value = "${yandex_compute_instance.cocroachdb.network_interface.0.ip_address}"
-}
-
-output "cocroachdb_ip_address_public" {
-  value = "${yandex_compute_instance.cocroachdb.network_interface.0.nat_ip_address}"
-}
-output "jenkins_ip_address_private" {
-  value = "${yandex_compute_instance.jenkins.network_interface.0.ip_address}"
-}
-
-output "jenkins_ip_address_public" {
-  value = "${yandex_compute_instance.jenkins.network_interface.0.nat_ip_address}"
-}
 
 
 data "template_file" "policy" {
